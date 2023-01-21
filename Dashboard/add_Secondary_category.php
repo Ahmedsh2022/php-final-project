@@ -157,7 +157,7 @@ include "partial/header.php";
                                             </div>
 
                                             <div class="form-actions">
-                                                <a href="show_category.php">
+                                                <a href="show_secondary_categories.php">
                                                     <button type="button" class="btn btn-warning mr-1">
                                                         <i class="ft-x"></i> Cancel
                                                     </button>
