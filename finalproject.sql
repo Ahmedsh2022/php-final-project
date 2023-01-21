@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2022 at 09:36 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.10
+-- Generation Time: Jan 21, 2023 at 10:52 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,23 +29,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admins` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `phone_number` varchar(30) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `status` int(11) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `country` varchar(50) NOT NULL,
+  `gender` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `name`, `phone_number`, `email`, `password`, `status`, `address`, `description`) VALUES
-(1, 'Othman Shbeir 120201509', '059999999', 'Othman@email.com', '25f9e794323b453885f5181f1b624d0b', 1, 'Gaza-Khan Younis', 'Computer Science Student theird level Semester 2'),
-(12, 'Ahmed', '056955587999', 'Ahmed@email.com', 'd893920d68e6b409fa4dd9bbe457ff55', 1, 'Khan Younis', 'Managing and developing webSites'),
-(16, 'ali', '5165461565', 'ali@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 1, 'Jordan', 'CS Student');
+INSERT INTO `admins` (`id`, `name`, `email`, `username`, `password`, `country`, `gender`) VALUES
+(1, 'Ahmed Shbeir', 'ahmed@email.com', 'AhmedShbeir', 'AhmedShbeir123456', 'Gaza', 0),
+(2, 'Abu Ahmed', 'Abuahmed@email.com', 'AbuAhmed@#', 'AbuAhmed123456', 'Syria', 0);
 
 -- --------------------------------------------------------
 
@@ -55,91 +53,63 @@ INSERT INTO `admins` (`id`, `name`, `phone_number`, `email`, `password`, `status
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `description` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `description`) VALUES
-(18, 'Electronic Devices', 'Electronic Devices 2022'),
-(19, 'Mobile Phones', 'Mobile Phones'),
-(20, 'Clothes', 'Clothes'),
-(21, 'Cameras', 'Cameras'),
-(27, 'Appliances', 'Appliances'),
-(28, 'Animals', 'Animals');
+INSERT INTO `categories` (`id`, `name`) VALUES
+(32, 'Mathematics'),
+(31, 'Programming'),
+(35, 'Psychology '),
+(33, 'Science');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rating`
+-- Table structure for table `products`
 --
 
-CREATE TABLE `rating` (
+CREATE TABLE `products` (
   `id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `macAdd` varchar(255) NOT NULL,
-  `rate` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `rating`
---
-
-INSERT INTO `rating` (`id`, `store_id`, `macAdd`, `rate`) VALUES
-(1, 8, '60-14-B3-B0-89-C7', 5),
-(3, 7, '60-14-B3-B0-89-C7', 5),
-(4, 12, '60-14-B3-B0-89-C7', 4),
-(5, 8, '51651651', 4),
-(6, 8, '1651161', 5),
-(7, 8, '525', 1),
-(8, 8, '852910', 1),
-(9, 8, '525', 1),
-(10, 8, '852910', 1),
-(11, 9, '60-14-B3-B0-89-C7', 5),
-(12, 4, '60-14-B3-B0-89-C7', 5),
-(13, 25, '60-14-B3-B0-89-C7', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `stores`
---
-
-CREATE TABLE `stores` (
-  `id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `phone` varchar(20) NOT NULL,
+  `sc_id` int(11) NOT NULL,
+  `pc_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `category_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `description` varchar(255) NOT NULL,
+  `price` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `stores`
+-- Dumping data for table `products`
 --
 
-INSERT INTO `stores` (`id`, `name`, `description`, `address`, `phone`, `image`, `category_id`) VALUES
-(4, 'ALI BABA', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat', 'China', '5165461565', '165280461828204.png', 19),
-(5, 'ABU AHMED', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat', 'Gaza', '5165461', '16528047283718.png', 20),
-(7, 'AMAZON', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat', 'USA', '5165461', '165280891631478.png', 18),
-(8, 'ABU AHMED1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat', 'Gaza', '5165461', '16528089302599.png', 18),
-(9, 'STORE.COM', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Jordan', '5165461565', '165280895234248.png', 18),
-(10, 'ELECTRONICO', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Electronico', '6565', '165280897614287.png', 18),
-(12, 'ALI', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Jordan', '5165461565', '16528102684087.png', 19),
-(13, 'ALI2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Jordan', '5165461565', '165281029063046.png', 19),
-(14, 'AMAZON3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'USA', '5165461', '165281031899822.png', 19),
-(15, 'OMER2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Gaza', '5165461', '165281040167694.png', 20),
-(16, 'OMER5', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Gaza', '5165461', '165281041879666.png', 20),
-(17, 'MOHAMMED22', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Egypt', '5165461', '165281062254702.png', 20),
-(19, 'ALI222', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Jordan', '5165461565', '165281065977807.png', 21),
-(21, 'ABU AHMED222', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Gaza', '5165461', '165281071915921.png', 21),
-(22, 'AMAZON222222', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'USA', '5165461', '165281073388326.png', 21),
-(23, 'MOHAMMED222222', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Egypt', '5165461', '165281074815362.png', 21),
-(25, 'ALI20222', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Jordan', '5165461565', '165290224288501.png', 27);
+INSERT INTO `products` (`id`, `sc_id`, `pc_id`, `name`, `image`, `description`, `price`) VALUES
+(14, 1, 31, 'History Book', 'History Book20167433483093899.jpg', 'No Description    ', 200),
+(15, 1, 32, 'History Book', 'History Book167433587011812.jfif', 'New Description  ', 100);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `secondary_categories`
+--
+
+CREATE TABLE `secondary_categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `pc_id` int(11) NOT NULL,
+  `description` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `secondary_categories`
+--
+
+INSERT INTO `secondary_categories` (`id`, `name`, `pc_id`, `description`) VALUES
+(1, 'Java OOP', 31, 'Advanced  Java Object-Oriented for Seniors.'),
+(2, 'Python', 31, 'No Description');
 
 --
 -- Indexes for dumped tables
@@ -149,8 +119,7 @@ INSERT INTO `stores` (`id`, `name`, `description`, `address`, `phone`, `image`, 
 -- Indexes for table `admins`
 --
 ALTER TABLE `admins`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `categories`
@@ -160,18 +129,19 @@ ALTER TABLE `categories`
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indexes for table `rating`
+-- Indexes for table `products`
 --
-ALTER TABLE `rating`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sc_id` (`sc_id`),
+  ADD KEY `primary_c_id` (`pc_id`);
 
 --
--- Indexes for table `stores`
+-- Indexes for table `secondary_categories`
 --
-ALTER TABLE `stores`
+ALTER TABLE `secondary_categories`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD KEY `category_id` (`category_id`);
+  ADD KEY `pc_id` (`pc_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -181,35 +151,42 @@ ALTER TABLE `stores`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
--- AUTO_INCREMENT for table `rating`
+-- AUTO_INCREMENT for table `products`
 --
-ALTER TABLE `rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `stores`
+-- AUTO_INCREMENT for table `secondary_categories`
 --
-ALTER TABLE `stores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+ALTER TABLE `secondary_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `stores`
+-- Constraints for table `products`
 --
-ALTER TABLE `stores`
-  ADD CONSTRAINT `category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
+ALTER TABLE `products`
+  ADD CONSTRAINT `primary_c_id` FOREIGN KEY (`pc_id`) REFERENCES `categories` (`id`),
+  ADD CONSTRAINT `sc_id` FOREIGN KEY (`sc_id`) REFERENCES `secondary_categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `secondary_categories`
+--
+ALTER TABLE `secondary_categories`
+  ADD CONSTRAINT `pc_id` FOREIGN KEY (`pc_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
