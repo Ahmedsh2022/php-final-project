@@ -102,7 +102,7 @@ include "partial/header.php";
                                         if (!empty($errors['general_error'])) {
                                             echo "<div class='alert alert-danger'>" . $errors["general_error"] . "</div>";
                                         } elseif ($success) {
-                                            echo "<div class='alert alert-success'>Category Added Succesfully</div>";
+                                            echo "<div class='alert alert-success'>Category updated Succesfully</div>";
                                         }
                                         ?>
                                         <form class="form" method="post" action=" <?php echo $_SERVER['PHP_SELF'] . "?id=" . $_GET['id'] ?>">
